@@ -35,7 +35,7 @@ This project was built as a **frontend portfolio piece** to demonstrate deep und
 
 ## 🌐 Live Demo
 
-🔗 **[https://securepay-checkout.vercel.app/](https://securepay-checkout.vercel.app/)**
+🔗 **[https://secure-pay-theta.vercel.app/](https://secure-pay-theta.vercel.app/)**
 
 ---
 
