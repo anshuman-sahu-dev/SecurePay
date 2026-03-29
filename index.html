@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecurePay</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Locomotive Scroll CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <!-- Our Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Three.js background canvas -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Glow blobs -->
+  <div class="glow-blob glow-blob-1"></div>
+  <div class="glow-blob glow-blob-2"></div>
+
+  <!-- Locomotive Scroll Container -->
+  <div id="scroll-container" data-scroll-container>
+    <section class="hero" data-scroll-section>
+      <div class="checkout-layout">
+
+        <!-- ══════════════════════════════════════
+             LEFT COLUMN — Card preview
+        ══════════════════════════════════════ -->
+        <div class="left-col" id="leftCol">
+
+          <!-- Brand -->
+          <div class="brand-bar">
+            <span class="brand-icon">⬡</span>
+            <span class="brand-name">SecurePay</span>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="order-summary" id="orderSummary">
+            <div class="order-label">You are paying</div>
+            <div class="order-amount">
+              <select id="currencySelect" class="currency-select">
+                <option value="$">USD $</option>
+                <option value="€">EUR €</option>
+                <option value="£">GBP £</option>
+                <option value="₹">INR ₹</option>
+                <option value="¥">JPY ¥</option>
+              </select>
+              <span id="amountDisplay">249.00</span>
+            </div>
+            <div class="order-items">
+              <div class="order-item">
+                <span>Pro Plan — Annual</span>
+                <span>$229.00</span>
+              </div>
+              <div class="order-item">
+                <span>GST (8.7%)</span>
+                <span>$20.00</span>
+              </div>
+              <div class="order-divider"></div>
+              <div class="order-item order-total">
+                <span>Total</span>
+                <span>$249.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Scene -->
+          <div class="card-scene" id="cardScene">
+            <div class="card-flipper" id="cardFlipper">
+
+              <!-- FRONT -->
+              <div class="card-face card-front" id="cardFront">
+                <div class="card-focus-ring" id="focusRing"></div>
+
+                <div class="card-top">
+                  <!-- Contactless icon -->
+                  <svg class="contactless-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12.5C5 8.91 7.91 6 11.5 6" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"
+                      stroke-linecap="round" />
+                    <path d="M2 12.5C2 7.25 6.25 3 11.5 3" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"
+                      stroke-linecap="round" />
+                    <path d="M8 12.5C8 10.57 9.57 9 11.5 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"
+                      stroke-linecap="round" />
+                    <circle cx="11.5" cy="12.5" r="1.5" fill="rgba(255,255,255,0.9)" />
+                  </svg>
+                  <!-- Chip SVG -->
+                  <svg class="chip" viewBox="0 0 50 38" fill="none">
+                    <rect width="50" height="38" rx="6" fill="#d4a843" />
+                    <rect x="14" y="1" width="22" height="36" rx="2" fill="none" stroke="#b8902a" stroke-width="1" />
+                    <rect x="1" y="12" width="48" height="14" rx="2" fill="none" stroke="#b8902a" stroke-width="1" />
+                    <rect x="18" y="9" width="14" height="20" rx="2" fill="#c9992e" opacity="0.6" />
+                  </svg>
+                  <!-- Network logo (SVG-based) -->
+                  <div class="network-logo-wrap" id="networkLogoWrap">
+                    <!-- Visa -->
+                    <svg id="logo-visa" class="net-svg" viewBox="0 0 80 26"><text x="0" y="22"
+                        font-family="Arial Black,sans-serif" font-weight="900" font-size="26" fill="white"
+                        letter-spacing="-1">VISA</text></svg>
+                    <!-- Mastercard -->
+                    <svg id="logo-mc" class="net-svg hidden" viewBox="0 0 52 32">
+                      <circle cx="16" cy="16" r="16" fill="#EB001B" opacity="0.9" />
+                      <circle cx="36" cy="16" r="16" fill="#F79E1B" opacity="0.9" />
+                      <path d="M26 6.4a16 16 0 010 19.2A16 16 0 0126 6.4z" fill="#FF5F00" opacity="0.9" />
+                    </svg>
+                    <!-- Amex -->
+                    <svg id="logo-amex" class="net-svg hidden" viewBox="0 0 90 28">
+                      <rect width="90" height="28" rx="4" fill="rgba(255,255,255,0.15)" /><text x="6" y="21"
+                        font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="white"
+                        letter-spacing="1">AMERICAN EXPRESS</text>
+                    </svg>
+                    <!-- Discover -->
+                    <svg id="logo-discover" class="net-svg hidden" viewBox="0 0 90 28">
+                      <rect width="90" height="28" rx="4" fill="rgba(255,255,255,0.15)" /><text x="6" y="20"
+                        font-family="Arial,sans-serif" font-weight="700" font-size="13" fill="white">DISCOVER</text>
+                      <circle cx="72" cy="14" r="10" fill="#F76F20" opacity="0.85" />
+                    </svg>
+                    <!-- RuPay -->
+                    <svg id="logo-rupay" class="net-svg hidden" viewBox="0 0 90 28">
+                      <rect width="90" height="28" rx="4" fill="rgba(255,255,255,0.15)" /><text x="6" y="20"
+                        font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#1fa3e0">Ru</text><text
+                        x="27" y="20" font-family="Arial,sans-serif" font-weight="700" font-size="15"
+                        fill="white">Pay</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Card number -->
+                <div class="card-number-display" id="cardNumDisplay">
+                  <span class="group" id="g1">####</span>
+                  <span class="group" id="g2">####</span>
+                  <span class="group" id="g3">####</span>
+                  <span class="group" id="g4">####</span>
+                </div>
+
+                <!-- Name + expiry -->
+                <div class="card-bottom">
+                  <div id="cardNameBlock">
+                    <div class="card-label">Card Holder</div>
+                    <div class="card-value" id="cardNameDisplay">FULL NAME</div>
+                  </div>
+                  <div id="cardDateBlock">
+                    <div class="card-label">Expires</div>
+                    <div class="card-value" id="cardDateDisplay">MM / YY</div>
+                  </div>
+                </div>
+              </div><!-- /front -->
+
+              <!-- BACK -->
+              <div class="card-face card-back">
+                <div class="magnetic-stripe"></div>
+                <div class="cvv-strip">
+                  <span class="cvv-label">CVV</span>
+                  <span class="cvv-dots" id="cvvDisplay">•••</span>
+                </div>
+                <div class="back-network">
+                  <div class="hologram"></div>
+                  <span class="back-net-logo" id="networkLogoBack">VISA</span>
+                </div>
+                <div class="back-disclaimer">Authorized Signature — Not Valid Unless Signed</div>
+              </div>
+
+            </div><!-- /flipper -->
+          </div><!-- /card-scene -->
+
+          <!-- Saved Cards -->
+          <div class="saved-cards-section" id="savedSection">
+            <div class="saved-cards-label">Quick select saved card</div>
+            <div class="saved-cards-list">
+              <div class="saved-card" data-num="4111111111111111" data-name="ALEX JOHNSON" data-exp-m="09"
+                data-exp-y="2027" data-type="visa">
+                <div class="saved-card-icon visa-icon">VISA</div>
+                <div class="saved-card-info">
+                  <div class="saved-card-num">•••• •••• •••• 1111</div>
+                  <div class="saved-card-exp">09/27</div>
+                </div>
+              </div>
+              <div class="saved-card" data-num="5500005555555559" data-name="ALEX JOHNSON" data-exp-m="03"
+                data-exp-y="2026" data-type="mc">
+                <div class="saved-card-icon mc-icon">MC</div>
+                <div class="saved-card-info">
+                  <div class="saved-card-num">•••• •••• •••• 5559</div>
+                  <div class="saved-card-exp">03/26</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security badges -->
+          <div class="security-badges">
+            <div class="badge-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6L12 2z" fill="rgba(0,200,150,0.7)"
+                  stroke="rgba(0,200,150,0.9)" stroke-width="1" />
+              </svg>
+              <span>SSL Encrypted</span>
+            </div>
+            <div class="badge-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="11" width="18" height="11" rx="2" fill="rgba(91,110,245,0.7)"
+                  stroke="rgba(91,110,245,0.9)" stroke-width="1" />
+                <path d="M7 11V7a5 5 0 0110 0v4" stroke="rgba(91,110,245,0.9)" stroke-width="1.5"
+                  stroke-linecap="round" />
+              </svg>
+              <span>PCI-DSS Level 1</span>
+            </div>
+            <div class="badge-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" fill="rgba(212,168,67,0.6)" stroke="rgba(212,168,67,0.9)"
+                  stroke-width="1" /><text x="12" y="16" text-anchor="middle" font-size="9" fill="white"
+                  font-weight="700">3DS</text>
+              </svg>
+              <span>3D Secure</span>
+            </div>
+          </div>
+
+        </div><!-- /left-col -->
+
+        <!-- ══════════════════════════════════════
+             RIGHT COLUMN — Form
+        ══════════════════════════════════════ -->
+        <div class="right-col" id="rightCol">
+          <div class="form-panel" id="formPanel">
+
+            <!-- Payment method tabs -->
+            <div class="pay-tabs" id="payTabs">
+              <button class="pay-tab active" data-tab="card">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="5" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M2 10h20" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+                Card
+              </button>
+              <button class="pay-tab" data-tab="upi">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+                UPI
+              </button>
+              <button class="pay-tab" data-tab="netbank">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 10l9-7 9 7v10H3V10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                  <rect x="9" y="14" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+                Net Banking
+              </button>
+            </div>
+
+            <!-- ── TAB: CARD ── -->
+            <div id="tab-card" class="tab-content active">
+              <div id="formContent">
+                <div class="form-title">Card Details</div>
+                <div class="form-subtitle">Your payment is protected by 256-bit encryption.</div>
+
+                <!-- Card Number -->
+                <div class="field-wrap" id="wrap-number">
+                  <label class="field-label" for="inputNumber">Card Number</label>
+                  <div class="input-icon-wrap">
+                    <input class="form-input" id="inputNumber" type="text" inputmode="numeric"
+                      placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="off" data-ref="number" />
+                    <span class="input-icon" id="cardTypeIcon">💳</span>
+                  </div>
+                  <div class="field-error" id="err-number"></div>
+                </div>
+
+                <!-- Cardholder Name -->
+                <div class="field-wrap" id="wrap-name">
+                  <label class="field-label" for="inputName">Cardholder Name</label>
+                  <input class="form-input" id="inputName" type="text" placeholder="As printed on card"
+                    autocomplete="off" data-ref="name" />
+                  <div class="field-error" id="err-name"></div>
+                </div>
+
+                <!-- Expiry + CVV -->
+                <div class="row-inline">
+                  <div class="field-wrap" id="wrap-month">
+                    <label class="field-label" for="inputMonth">Month</label>
+                    <div class="select-wrap">
+                      <select class="form-select" id="inputMonth" data-ref="date">
+                        <option value="" disabled selected>MM</option>
+                      </select>
+                    </div>
+                    <div class="field-error" id="err-month"></div>
+                  </div>
+                  <div class="field-wrap" id="wrap-year">
+                    <label class="field-label" for="inputYear">Year</label>
+                    <div class="select-wrap">
+                      <select class="form-select" id="inputYear" data-ref="date">
+                        <option value="" disabled selected>YYYY</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field-wrap" id="wrap-cvv">
+                    <label class="field-label" for="inputCvv">
+                      CVV
+                      <span class="cvv-hint" id="cvvHintBtn" title="3 digits on back, 4 for Amex">?</span>
+                    </label>
+                    <input class="form-input" id="inputCvv" type="password" inputmode="numeric" placeholder="•••"
+                      maxlength="4" autocomplete="off" data-ref="cvv" />
+                    <div class="field-error" id="err-cvv"></div>
+                  </div>
+                </div>
+
+                <!-- Save card toggle -->
+                <div class="save-card-row">
+                  <label class="toggle-label">
+                    <input type="checkbox" id="saveCardCheck" class="toggle-check" />
+                    <span class="toggle-track">
+                      <span class="toggle-thumb"></span>
+                    </span>
+                    <span class="toggle-text">Save card for future payments</span>
+                  </label>
+                </div>
+
+                <!-- Pay button -->
+                <button class="btn-submit" id="btnSubmit">
+                  <span id="btnText">Pay <span id="btnAmount">$249.00</span> →</span>
+                  <span id="btnLoader" class="btn-loader hidden">
+                    <span class="spinner"></span> Processing…
+                  </span>
+                </button>
+
+                <!-- Accepted card networks -->
+                <div class="accepted-networks">
+                  <span class="accepted-label">Accepted:</span>
+                  <span class="net-pill visa-pill">VISA</span>
+                  <span class="net-pill mc-pill">MC</span>
+                  <span class="net-pill amex-pill">AMEX</span>
+                  <span class="net-pill discover-pill">DISC</span>
+                  <span class="net-pill rupay-pill">RuPay</span>
+                </div>
+
+              </div><!-- /formContent -->
+            </div><!-- /tab-card -->
+
+            <!-- ── TAB: UPI ── -->
+            <div id="tab-upi" class="tab-content">
+              <div class="alt-tab-body">
+                <div class="form-title">UPI Payment</div>
+                <div class="form-subtitle">Enter your UPI ID to pay instantly.</div>
+                <div class="field-wrap">
+                  <label class="field-label" for="upiInput">UPI ID</label>
+                  <input class="form-input" id="upiInput" type="text" placeholder="yourname@bank" />
+                </div>
+                <div class="upi-apps">
+                  <div class="upi-app-btn">GPay</div>
+                  <div class="upi-app-btn">PhonePe</div>
+                  <div class="upi-app-btn">Paytm</div>
+                  <div class="upi-app-btn">BHIM</div>
+                </div>
+                <button class="btn-submit" style="margin-top:20px">Pay $249.00 via UPI →</button>
+              </div>
+            </div>
+
+            <!-- ── TAB: NET BANKING ── -->
+            <div id="tab-netbank" class="tab-content">
+              <div class="alt-tab-body" style="position:relative">
+
+                <!-- Header row: title + session timer -->
+                <div class="nb-header">
+                  <div>
+                    <div class="form-title">Net Banking</div>
+                    <div class="form-subtitle">Select your bank to continue securely.</div>
+                  </div>
+                  <div class="nb-timer-wrap">
+                    <div class="nb-timer-ring">
+                      <svg class="nb-timer-svg" viewBox="0 0 36 36">
+                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.07)"
+                          stroke-width="2.5" />
+                        <circle id="timerArc" cx="18" cy="18" r="15.9" fill="none" stroke="var(--accent)"
+                          stroke-width="2.5" stroke-dasharray="100 100" stroke-linecap="round"
+                          transform="rotate(-90 18 18)" />
+                      </svg>
+                    </div>
+                    <div class="nb-timer-text">
+                      <span class="nb-timer-label">Session</span>
+                      <span class="nb-timer-count" id="nbTimerCount">10:00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Search box -->
+                <div class="nb-search-wrap">
+                  <span class="nb-search-icon">🔍</span>
+                  <input class="nb-search" id="nbSearch" type="text" placeholder="Search your bank…"
+                    autocomplete="off" />
+                  <button class="nb-search-clear" id="nbSearchClear" style="display:none">✕</button>
+                </div>
+
+                <!-- Category tabs -->
+                <div class="nb-cats">
+                  <button class="nb-cat active" data-cat="popular">⭐ Popular</button>
+                  <button class="nb-cat" data-cat="private">🏢 Private</button>
+                  <button class="nb-cat" data-cat="public">🏛 Public</button>
+                  <button class="nb-cat" data-cat="all">🏦 All Banks</button>
+                </div>
+
+                <!-- Bank grid (scrollable) -->
+                <div class="bank-grid-wrap">
+                  <div class="bank-grid" id="bankGrid"></div>
+                  <div class="nb-no-results" id="nbNoResults" style="display:none">
+                    No bank found for "<span id="nbNoResultsTerm"></span>"
+                  </div>
+                </div>
+
+                <!-- Selected bank info bar -->
+                <div class="nb-selected-bar" id="nbSelectedBar" style="display:none">
+                  <img class="nb-selected-logo-img" id="nbSelectedLogoImg" src="" alt="" width="28" height="28" />
+                  <span class="nb-selected-name" id="nbSelectedName"></span>
+                  <button class="nb-selected-clear" id="nbSelectedClearBtn">Change ✕</button>
+                </div>
+
+                <!-- Redirect notice -->
+                <div class="nb-redirect-notice">
+                  <span>🔒</span>
+                  <span>You'll be redirected to your bank's <strong>secure portal</strong> to authenticate.</span>
+                </div>
+
+                <!-- Continue button (disabled until bank selected) -->
+                <button class="btn-submit nb-continue-btn" id="nbContinueBtn" disabled>
+                  <span id="nbBtnText">Select a Bank to Continue</span>
+                  <span id="nbBtnLoader" class="btn-loader hidden">
+                    <span class="spinner"></span> Redirecting to bank…
+                  </span>
+                </button>
+
+                <!-- Security badges -->
+                <div class="nb-trust-row">
+                  <span class="nb-trust-badge">🛡 256-bit SSL</span>
+                  <span class="nb-trust-badge">🔐 RBI Compliant</span>
+                  <span class="nb-trust-badge">✅ PCI DSS</span>
+                </div>
+
+                <!-- Redirect overlay -->
+                <div class="nb-redirect-overlay" id="nbRedirectOverlay">
+                  <div class="nb-redirect-card">
+                    <div class="nb-redirect-bank-logo" id="nbRedirectLogo"></div>
+                    <div class="nb-redirect-title">Redirecting to <span id="nbRedirectBankName"></span></div>
+                    <div class="nb-redirect-subtitle">Please do not close this window</div>
+                    <div class="nb-redirect-dots"><span></span><span></span><span></span></div>
+                    <div class="nb-redirect-progress-wrap">
+                      <div class="nb-redirect-progress-bar" id="nbProgressBar"></div>
+                    </div>
+                    <div class="nb-redirect-pct" id="nbRedirectPct">0%</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ── SUCCESS SCREEN ── -->
+            <div class="success-overlay" id="successOverlay">
+              <div class="success-ring">
+                <div class="success-icon">✓</div>
+              </div>
+              <div class="success-title">Payment Successful!</div>
+              <div class="success-msg">Your transaction is complete and secure.</div>
+              <div class="receipt-box">
+                <div class="receipt-row">
+                  <span>Transaction ID</span>
+                  <span class="receipt-val" id="txnId">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Amount Paid</span>
+                  <span class="receipt-val" id="txnAmount">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Card</span>
+                  <span class="receipt-val" id="txnCard">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Date & Time</span>
+                  <span class="receipt-val" id="txnDate">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span>Status</span>
+                  <span class="receipt-status">APPROVED ✓</span>
+                </div>
+              </div>
+              <button class="btn-submit" onclick="window.print()" style="margin-top:8px;font-size:14px;padding:12px">
+                🖨 Download Receipt
+              </button>
+            </div>
+
+          </div><!-- /form-panel -->
+        </div><!-- /right-col -->
+
+      </div><!-- /checkout-layout -->
+    </section>
+  </div><!-- /scroll-container -->
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
