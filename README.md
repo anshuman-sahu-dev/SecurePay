@@ -226,8 +226,8 @@ For any queries, feedback, or collaboration:
 
 ---
 
-📧 **Email:** toanshumansahu@gmail.com
-📞 **Phone:** +91 78549 39308
+[![Email](https://img.shields.io/badge/Email-toanshumansahu@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:toanshumansahu@gmail.com) <br>
+[![Phone](https://img.shields.io/badge/Phone-+91_78549_39308-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](tel:+917854939308) <br>
 
 ---
 
