@@ -210,8 +210,6 @@ For any queries, feedback, or collaboration:
 
 © 2026 **WanderFramez\_**. All rights reserved.
 
-> *"Every great product starts with a great checkout experience."* 💳
-
 ---
 
 ## 👨‍💻 Developer
