@@ -2,7 +2,7 @@
 
 > Premium payment experience. Animated. Validated. Real-world ready.
 
-![SecurePay Banner](assets/banner.svg)
+![SecurePay Banner](assets/favicon.png)
 
 ---
 
