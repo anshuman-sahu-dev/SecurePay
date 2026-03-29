@@ -199,18 +199,23 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ## 📬 Contact
 
-## 📬 Contact
-
 For any queries, feedback, or collaboration:
 
-<div align="left">
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:toanshumansahu@gmail.com) &nbsp; toanshumansahu@gmail.com
 
-[![Email](https://img.shields.io/badge/Email-toanshumansahu@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:toanshumansahu@gmail.com)&nbsp;&nbsp; <br>
-[![Phone](https://img.shields.io/badge/Phone-+91_78549_39308-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](tel:+917854939308)&nbsp;&nbsp; <br>
-[![GitHub](https://img.shields.io/badge/GitHub-anshuman--sahu--dev-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anshuman-sahu-dev)&nbsp;&nbsp; <br>
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Anshuman_Sahu-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anshuman-sahu-371a6535b/) <br>
+[![Phone](https://img.shields.io/badge/Phone-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](tel:+917854939308) &nbsp; +91 78549 39308
 
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anshuman-sahu-dev) &nbsp; anshuman-sahu-dev
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anshuman-sahu-371a6535b/) &nbsp; Anshuman Sahu
+```
+
+GitHub pe render hoga kuch aisa:
+```
+[✉ Email]      toanshumansahu@gmail.com
+[📞 Phone]     +91 78549 39308
+[🐙 GitHub]    anshuman-sahu-dev
+[💼 LinkedIn]  Anshuman Sahu
 
 ---
 
