@@ -137,7 +137,7 @@ securepay/
 ├── script.js           # All JS — Three.js, GSAP, validation, net banking logic
 │
 └── assets/             # Static assets
-    └── banner.svg      # Project banner image
+    └── favicon.png      # Project favicon
 ```
 
 > ⚡ No build tools. No npm. No bundler. Pure vanilla — clone and run.
