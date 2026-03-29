@@ -50,8 +50,7 @@ This project is ideal for:
 
 ## 🚀 Live Demo
 
-> Clone the repo and open `index.html` in a local server (see [Getting Started](#-getting-started)).  
-> Direct `file://` open is **not recommended** due to CORS restrictions on logo assets.
+secure-pay-theta.vercel.app
 
 ---
 
