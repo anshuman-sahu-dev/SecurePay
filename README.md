@@ -201,9 +201,10 @@ Then open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 For any queries, feedback, or collaboration:
 
-- 📧 **Email:** toanshumansahu@gmail.com
-- 📞 **Phone:** +91 78549 39308
-- 🐙 **GitHub:** [anshuman-sahu-dev](https://github.com/anshuman-sahu-dev)
+[![Email](https://img.shields.io/badge/Email-toanshumansahu@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:toanshumansahu@gmail.com)
+[![Phone](https://img.shields.io/badge/Phone-+91_78549_39308-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](tel:+917854939308)
+[![GitHub](https://img.shields.io/badge/GitHub-anshuman--sahu--dev-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anshuman-sahu-dev)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Anshuman_Sahu-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anshuman-sahu-371a6535b/)
 
 ---
 
