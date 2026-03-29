@@ -50,7 +50,7 @@ This project is ideal for:
 
 ## 🚀 Live Demo
 
-secure-pay-theta.vercel.app
+🔗 **[https://secure-pay-theta.vercel.app](secure-pay-theta.vercel.app)**
 
 ---
 
